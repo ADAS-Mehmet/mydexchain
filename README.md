@@ -75,23 +75,23 @@ docker attach mydexchain
 ##### 3. Node RestAPI commands :
 
 ```
-"/setDextracker/{dexTrackerNumber}”
+"http://{DockerHostIP}:2020/setDextracker/{dexTrackerNumber}”
 ```
 - `dexTrackerNumber : DexChain Tracker Number`
 ```
-“/isWallet/{address}”
+“http://{DockerHostIP}:2020/isWallet/{address}”
 ```
 - `address: Dexchain Address`
 ```
-"/balanceWallet/{address}"
+"http://{DockerHostIP}:2020/balanceWallet/{address}"
 ```
 - `address: Dexchain Address`
 ```
-“/createWallet/{password}”
+“http://{DockerHostIP}:2020/createWallet/{password}”
 ```
 - `password: Dexchain Address password “Please Don’t Forget it”`
 ```
-"/sendTransaction/{sender}&{password}&{receiver}&{amount}&{fee}&{contract}&{description}"
+"http://{DockerHostIP}:2020/sendTransaction/{sender}&{password}&{receiver}&{amount}&{fee}&{contract}&{description}"
 ```
 - `sender : Sender Dexchain Address`
 - `password: Dexchain Address password`
