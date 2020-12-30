@@ -166,7 +166,7 @@ rsync -avzhHP --rsync-path="sudo rsync" -e "ssh -i key -o StrictHostKeyChecking=
 ##### 3. Start `MyDexChain` Docker Container on the New Host :
 
 ``` 
-docker run -d --rm -p 2020:2020 -v mydexchain:/var/lib/postgresql/ --name mydexchain mydexchain/mydexchain
+docker run -d --rm -p 2020:2020 -v mydexchain:/var/lib/postgresql/ --privileged --log-driver=none --name mydexchain mydexchain/mydexchain:latest
 ```
 
 
@@ -174,6 +174,17 @@ docker run -d --rm -p 2020:2020 -v mydexchain:/var/lib/postgresql/ --name mydexc
 
 ``` 
 docker attach mydexchain
+```
+
+### I am Getting Errords in Windows OS? 
+Make sure `Use the WSL 2 based engine` is enabled in Docker General Settings.
+
+
+### Where is the Docker Mount Volume Located in Windows OS? 
+Mount folder is located under.
+
+``` 
+\\wsl$\docker-desktop-data\version-pack-data\community\docker\volumes
 ```
 
 ### Help! It's not working for me!
