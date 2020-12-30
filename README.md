@@ -123,6 +123,8 @@ These options are settings that change shell behavior. The following table is a 
 
 MyDexCahin maps blocks inside PostgreSQL and it has been addressed inside dockerfile. All the data is saved inside **`/var/lib/docker/volumes/mydexchain`** and make sure that you **backup** the folder.
 
+#### Linux & MacOs
+
 ##### 1. Stop `MyDexChain` Node Docker Container (For Data Consistency):
 
 ``` 
@@ -138,18 +140,44 @@ rsync -avzhHP /var/lib/docker/volumes/mydexchain/ /backup_path/mydexchain/
 ##### 3. Start `MyDexChain` Docker Container on the New Docker Host :
 
 ``` 
-docker run -d --rm -p 2020:2020 -v mydexchain:/var/lib/postgresql/ --name mydexchain mydexchain/mydexchain
+docker run -d --rm -p 2020:2020 -v mydexchain:/var/lib/postgresql/ --privileged --log-driver=none --name mydexchain mydexchain/mydexchain:latest
 ```
 
 
-##### 4. Follow the Blocks on the New Docker Host :
+##### 4. Follow the Blocks :
 
 ``` 
 docker attach mydexchain
 ```
 
+#### Windows 
+
+##### 1. Stop `MyDexChain` Node Docker Container (For Data Consistency):
+
+``` 
+docker kill mydexchain
+```
+
+##### 2. Copy `%USERPROFILE%\AppData\Local\Docker\wsl\data\ext4.vhdx` to Backup Path:
+
+##### 3. Start `MyDexChain` Docker Container on the New Docker Host :
+
+``` 
+docker run -d --rm -p 2020:2020 -v mydexchain:/var/lib/postgresql/ --privileged --log-driver=none --name mydexchain mydexchain/mydexchain:latest
+```
+
+
+##### 4. Follow the Blocks :
+
+``` 
+docker attach mydexchain
+```
+
+
 ### How to Migrate the MyDexChain Node to Another Docker Host?
 Before migrating your node be sure that docker is `installed on target`.
+
+#### Linux & MacOs
 
 ##### 1. Stop `MyDexChain` Node Docker Container:
 
@@ -176,15 +204,49 @@ docker run -d --rm -p 2020:2020 -v mydexchain:/var/lib/postgresql/ --privileged 
 docker attach mydexchain
 ```
 
-### I am Getting Errords in Windows OS? 
+#### Windows
+
+##### 1. Stop `MyDexChain` Node Docker Container:
+
+``` 
+docker kill mydexchain
+```
+
+##### 2. Copy Node Files to New Docker Host :
+
+``` 
+%USERPROFILE%\AppData\Local\Docker\wsl\data\ext4.vhdx --> to the new dockerhost
+```
+
+##### 3. Start `MyDexChain` Docker Container on the New Host :
+
+``` 
+docker run -d --rm -p 2020:2020 -v mydexchain:/var/lib/postgresql/ --privileged --log-driver=none --name mydexchain mydexchain/mydexchain:latest
+```
+
+
+##### 4. Follow the Blocks on the New Docker Host :
+
+``` 
+docker attach mydexchain
+```
+
+### I am Getting Errors in Windows OS? 
 Make sure `Use the WSL 2 based engine` is enabled in Docker General Settings.
 
 
 ### Where is the Docker Mount Volume Located in Windows OS? 
-Mount folder is located under.
+Mount folder is located under:
 
 ``` 
 \\wsl$\docker-desktop-data\version-pack-data\community\docker\volumes
+```
+
+### Where is the Pyhsical Path Docker Mount Volume Located in Windows OS? 
+Mount disk is located under:
+
+``` 
+%USERPROFILE%\AppData\Local\Docker\wsl\data\ext4.vhdx
 ```
 
 ### Help! It's not working for me!
