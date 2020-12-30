@@ -52,7 +52,7 @@ docker -v
 MyDexChain docker file is stored in dockerhub and ready for use with command: (Please check the version and use as tag rather than latest)
 
 ```
-docker run -d --rm -p 2020:2020 -v mydexchain:/var/lib/postgresql/ --privileged -log=none --name mydexchain mydexchain/mydexchain:latest
+docker run -d --rm -p 2020:2020 -v mydexchain:/var/lib/postgresql/ --privileged --log-driver=none --name mydexchain mydexchain/mydexchain:latest
 ```
 
 After docker container **comes up** run the command;
